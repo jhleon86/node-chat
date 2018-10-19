@@ -1,0 +1,56 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the sidebar of the site/application.
+// -----------------------------------------------------------------------------
+
+//Sidebar Folded style
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the sidebar of the site/application.
+// -----------------------------------------------------------------------------
+
+//Sidebar Folded style
+.gx-sidebar--folded {
+  & .gx-sidebar,
+  & .gx-toolbar,
+  & .gx-sidebar .user-profile {
+    @include transition(all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1) 0s);
+  }
+
+  &:not(.gx-sidebar--expended) {
+    & .gx-toolbar {
+      left: $mini-drawer-width;
+    }
+
+    & .gx-sidebar {
+      min-width: $mini-drawer-width;
+      max-width: $mini-drawer-width;
+
+      & .user-profile {
+        padding-right: 12px;
+        padding-left: 12px;
+      }
+
+      & .user-detail,
+      & ul.nav-menu li.menu > a:before,
+      & .nav-text {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      & ul.nav-menu li.menu .sub-menu,
+      & .nav-header .nav-text {
+        display: none;
+      }
+
+      & .nav-header:before{
+        content: '';
+        display: inline-block;
+        width: 24px;
+        height: 2px;
+        margin: 0 auto;
+        background-color: $sidebar-text-color;
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+}

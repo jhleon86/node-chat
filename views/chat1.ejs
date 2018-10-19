@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Jumbo - A fully responsive, HTML5 based admin theme">
+    <meta name="keywords"
+          content="Responsive, HTML5, admin theme, business, professional, jQuery, web design, CSS3, sass">
+    <title>Jumbo Admin</title>
+    <!-- Site favicon -->
+    <link rel='shortcut icon' type='image/x-icon' href='images/favicon.ico'/>
+    <!-- /site favicon -->
+
+    <!-- Font Material stylesheet -->
+    <link rel="stylesheet" href="/public/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+    <!-- /font material stylesheet -->
+
+    <!-- Bootstrap stylesheet -->
+    <link href="/public/css/jumbo-bootstrap.css" rel="stylesheet">
+    <!-- /bootstrap stylesheet -->
+
+    <!-- Perfect Scrollbar stylesheet -->
+    <link href="/public/node_modules/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
+    <!-- /perfect scrollbar stylesheet -->
+
+    <!-- Form stylesheet -->
+    <link href="/public/css/jumbo-forms.css" rel="stylesheet">
+    <!-- /form stylesheet -->
+
+    <!-- Jumbo-core stylesheet -->
+    <link href="/public/css/jumbo-core.min.css" rel="stylesheet">
+    <!-- /jumbo-core stylesheet -->
+
+    <!-- Color-Theme stylesheet -->
+    <link id="override-css-id" href="/public/css/theme-dark-indigo.css" rel="stylesheet">
+    <!-- Color-Theme stylesheet -->
+
+</head>
+
+<body id="body" data-theme="dark-indigo">
+
+<!-- Loader Backdrop -->
+<div class="loader-backdrop">
+    <!-- Loader -->
+    <div class="loader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"></circle>
+        </svg>
+    </div>
+    <!-- /loader-->
+</div>
+<!-- loader backdrop -->
+
+<!-- Page container -->
+<div class="gx-container">
+    </div> 
+    <!-- /page sidebar -->
+
+    <!-- Main Container -->
+    <div class="gx-main-container">
+
+        <!-- Main Header -->
+        <header class="main-header">
+            <div class="gx-toolbar">
+                <p onclick="javascrpt:location.href='/'">HELPUME.COM</p>
+               <!-- <a class="site-logo" href="index.html">
+                    <img src="https://via.placeholder.com/194x65" alt="Jumbo" title="Jumbo">
+                </a> -->
+            </div>
+        </header>
+        <!-- /main header -->
+
+        <!-- Main Content -->
+        <div class="gx-main-content">
+            <!--gx-wrapper-->
+            <div class="gx-wrapper">
+                
+                
+                <div class="gx-module chat-module">
+                    <div id="gxChatModuleSidebar" class="chat-sidenav">
+                        <div class="chat-sidenav-main">
+                            <div class="chat-sidenav-header">
+                                <div class="chat-user-hd">
+                                    <div class="chat-avatar mr-3">
+                                        <div class="chat-avatar-mode">
+                                            <img src="https://via.placeholder.com/150x150" class="user-avatar size-50"
+                                                 alt="">
+                                            <span class="chat-mode online"></span>
+                                        </div>
+                                    </div>
+                                    <div class="module-user-info d-flex flex-column justify-content-center">
+                                        <div class="module-title">
+                                            <h5 class="mb-0"><%= user.email %></h5>
+                                        </div>
+                                        <div class="module-user-detail">
+                                            <a href="javascript:void(0)" class="text-muted"><%= user.email %></a>
+                                        </div>
+                                    </div>
+
+                                    <a class="ml-auto action-btn">
+                                        <i class="zmdi zmdi-more-vert"></i>
+                                    </a>
+                                </div>
+
+                                <div class="search-wrapper">
+                                    <div class="search-bar right-side-icon bg-transparent">
+                                        <div class="form-group">
+                                            <input class="form-control border-0"
+                                                   placeholder="" value="" type="search">
+                                            <button class="search-icon">
+                                                <i class="zmdi zmdi-search zmdi-hc-lg"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <ul class="nav tab-link nav-justified" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="tab" href="#chatList" role="tab"
+                                           aria-controls="chatList" aria-selected="true">USER LIST</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="chat-sidenav-content">
+                                <div class="tab-content">
+                                    <div id="chatList" class="tab-pane active ps-custom-scrollbar" style="position: relative;">
+                                        <div class="chat-user">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat-module-box">
+                        <div class="chat-box">
+                            <div class="chat-box-main">
+                                <div class="chat-main">
+                                    <div class="chat-main-header">
+                                        <a id="gxChatModuleSideNav" href="javascript:void(0)"
+                                           class="drawer-btn d-block action-btn action-btn d-lg-none mr-2">
+                                            <i class="zmdi zmdi-comment-text zmdi-hc-lg"></i>
+                                        </a>
+                                        <div class="chat-main-header-info">
+                                            <div class="chat-avatar mr-2">
+                                                <div class="chat-avatar-mode">
+                                                    <img src="https://via.placeholder.com/150x150"
+                                                         class="user-avatar size-60" alt="">
+                                                    <span class="chat-mode away"></span>
+                                                </div>
+                                            </div>
+                                            <div class="chat-contact-name">counselor@helpume.com</div>
+                                        </div>
+                                    </div>
+                                    <div class="chat-list-scroll" style="position: relative;">
+                                        <div class="chat-main-content">
+                                            
+                                        </div>
+
+                                    </div>
+                                    <div class="chat-main-footer">
+                                        <div class="d-flex flex-row align-items-center">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <textarea class="border-0 form-control chat-textarea"
+                                                              placeholder="Type and hit enter to send message"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="chat-sent">
+                                                <a class="action-btn" href="javascript:void(0);">
+                                                    <i class="zmdi  zmdi-mail-send"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+            <!--/gx-wrapper-->
+
+            <!-- Footer -->
+            <footer class="gx-footer">
+                <div class="d-flex flex-row justify-content-between">
+                    <p> Copyright Company Name © 2018</p>
+                </div>
+            </footer>
+            <!-- /footer -->
+
+        </div>
+        <!-- /main content -->
+
+    </div>
+    <!-- /main container -->
+
+<!--Load JQuery-->
+<script src="/public/node_modules/jquery/dist/jquery.min.js"></script>
+<!--Bootstrap JQuery-->
+<script src="/public/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<!--Perfect Scrollbar JQuery-->
+<script src="/public/node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
+<!--Big Slide JQuery-->
+<script src="/public/node_modules/bigslide/dist/bigSlide.min.js"></script>
+<!--Owl Carousel JQuery-->
+<script src="/public/node_modules/owl.carousel/dist/owl.carousel.min.js"></script>
+<script src="/public/js/jquery.validate.min.js"></script>
+<!--Custom JQuery-->
+<script src="/public/js/functions.js"></script>
+<script src="/public/js/custom/chat.js"></script>
+<script src="/public/socket.io.js"></script>
+    
+<script>
+
+    
+var host = 'localhost';
+var port = '3000';
+var socket;
+
+// 문서 로딩 후 실행됨
+$(function() {
+
+    connectToServer();
+
+    var output = {id:"<%= user.email %>"};
+    console.log('서버로 보낼 데이터 : ' + JSON.stringify(output));
+
+    if (socket == undefined) {
+        alert('서버에 연결되어 있지 않습니다. 먼저 서버에 연결하세요.');
+        return;
+    }
+    socket.emit('login', output); //socket 서버 사용자등록
+    
+    
+    // 전송 버튼 클릭 시 처리
+    $(".chat-sent").bind('click', function(event) {
+        var sender = "<%= user.email %>";
+        //var recepient = "counselor@helpume.com";
+        var recepient = $("div.chat-contact-name").text();
+        var data = $('.chat-textarea').val();
+
+        var output = {sender:sender, recepient:recepient, command:'chat', type:'text', data:data};
+        console.log('서버로 보낼 데이터 : ' + JSON.stringify(output));
+
+        if (socket == undefined) {
+            alert('서버에 연결되어 있지 않습니다. 먼저 서버에 연결하세요.');
+            return;
+        }
+        
+        $('.chat-textarea').val('');
+
+        socket.emit('message', output);
+
+        addToDiscussion('self', data);
+    });
+    
+    getUserList();
+    
+    $(document).delegate("div.chat-user-item","click", function(){
+        $(".chat-contact-name").text($(this).find("span.name").text());
+        $("#gxChatModuleSideNav").click();
+    });
+    
+    /*
+    $(document).delegate("i.zmdi-comment-text","click", function(){
+        console.log("aa");
+        getUserList();
+    });*/
+
+});
+
+// 서버에 연결하는 함수 정의
+function connectToServer() {
+
+    var options = {'forceNew':true};
+    var url = 'http://' + host + ':' + port;
+    socket = io.connect(url, options);
+
+    socket.on('connect', function() {
+        println('웹소켓 서버에 연결되었습니다. : ' + url);
+
+        socket.on('message', function(message) {
+            console.log(JSON.stringify(message));
+
+            println('<p>수신 메시지 : ' + message.sender + ', ' + message.recepient + ', ' + message.command + ', ' + message.data + '</p>');
+
+            addToDiscussion(message.sender, message.data);
+        });
+
+        socket.on('response', function(response) {
+            console.log(JSON.stringify(response));
+            println('응답 메시지를 받았습니다. : ' + response.command + ', ' + response.code + ', ' + response.message);
+        });
+        
+        socket.on('user_list', function(response) {
+            console.log(JSON.stringify(response));
+        });
+
+    });
+
+    socket.on('disconnect', function() {
+        println('웹소켓 연결이 종료되었습니다.');
+    });
+
+}
+
+
+function addToDiscussion(writer, msg) {
+    
+    var date = new Date();
+    var day = date.getDate();
+    var monthIndex = date.getMonth();
+    var year = date.getFullYear(); 
+    var hour = date.getHours();
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+    
+    var dt = hour+":"+minute;
+    
+    println("addToDiscussion 호출됨 : " + writer + ", " + msg);
+
+    var contents = "";
+    if (writer == 'self') {
+        contents = "<div class='d-flex flex-nowrap chat-item flex-row-reverse'>";
+        name = "<%= user.email %>";
+    }else{
+        contents = "<div class='d-flex flex-nowrap chat-item'>";
+        name = writer;
+    }
+
+    contents +=  "<img class='user-avatar' src='https://via.placeholder.com/150x150' alt='...'>"
+                +"<div class='bubble'>"
+                +    "<div class='message'>" + msg + "</div>"
+                +    "<div class='time'>"+name+"</div>"
+                +    "<div class='time'>"+dt+"</div>"
+                +"</div>"
+                +"</div>";
+    println("추가할 HTML : " + contents);
+    $(".chat-list-scroll").append(contents);
+}
+    
+function println(data) {
+    console.log(data);
+}
+    
+function getUserList(){
+    
+    $(".chat-user > *").remove();
+    
+    $.post( "/user_list", function( data ) {
+        
+        $.each(data,function(i,o){
+            
+            if(i=="counselor@helpume.com"){
+                var html = "<div class='chat-user-item'>"
+                +"    <div class='chat-user-row row' style='width:180px;'>"
+                +"        <div class='chat-avatar col-2'>"
+                +"            <div class='chat-avatar-mode'>"
+                +"                <img src='https://via.placeholder.com/150x150' class='user-avatar size-40' alt='Domnic Brown'>"
+                +"                <span class='chat-mode online'></span>"
+                +"            </div>"
+                +"        </div>"
+                +"        <div class='chat-info col-8'>"
+                +"            <span class='name h4'>"+i+"</span>"
+                +"        </div>"
+                +"    </div>"
+                +"</div>";
+                
+                $(".chat-user").append(html);
+                $(".chat-contact-name").text(i);
+            }
+        });
+    });
+}
+    
+    
+</script>
+
+</body>
+</html>
+

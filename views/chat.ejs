@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>채팅 클라이언트 03</title>
+		
+        <link href="/public/semantic.min.css" rel="stylesheet" >
+        
+        <style>
+            * {
+                padding:0;
+                margin:0;
+                box-sizing:border-box;
+            }
+
+            html {
+                width:100%;
+                height:100%;
+            }
+
+            body {
+                width:100%;
+                height:100%;
+                color: #000;
+                background-color: #fff;
+            }
+
+            .container {
+                width:100%;
+                height:100%;
+                display:flex;
+                flex-flow:column wrap;
+                align-items:center;
+                justify-content:center;
+            }
+
+            #cardbox {
+                width:94%;
+                height:94%;
+                padding-left:0.4em;
+                padding-right:0.4em;
+            }
+
+            #iconImage {
+                display:inline;
+            }
+
+            #titleText {
+                font-size:1.4em;
+                font-weight:bold;
+                color:#777;
+            }
+
+            #contentsText {
+                color:#999;
+            }
+
+            #result {
+                height:14em;
+                overflow:auto;
+            }
+
+
+            .discussion {
+                list-style: none;
+                background: #ededed;
+                margin: 0;
+                padding: 0 0 50px 0;
+            }
+
+            .discussion li {
+                padding: 0.5em;
+                overflow: hidden;
+                display: flex;
+            }
+
+            .discussion .avatar {
+                width: 40px;
+                position: relative;
+            }
+
+            .discussion .avatar img {
+                display: block;
+                width: 100%;
+            }
+
+            .other .avatar:after {
+                content: "";
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 0;
+                height: 0;
+                border: 5px solid white;
+                border-left-color: transparent;
+                border-bottom-color: transparent;
+            }
+
+            .self {
+                justify-content: flex-end;
+                align-items: flex-end;
+            }
+
+            .self .messages {
+                order: 1;
+                border-bottom-right-radius: 0;
+            }
+
+            .self .avatar {
+                order: 2;
+            }
+
+            .self .avatar:after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 0;
+                border: 5px solid white;
+                border-right-color: transparent;
+                border-top-color: transparent;
+                box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            }
+
+            .messages {
+                background: white;
+                padding: 10px;
+                border-radius: 2px;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            }
+
+            .messages p {
+                font-size: 0.8em;
+                margin: 0 0 0.2em 0;
+            }
+
+            .messages time {
+                font-size: 0.7em;
+                color: #ccc;
+            }
+
+		
+	   </style>
+        
+		<script src="/public/jquery-3.1.1.min.js"></script>    
+		<script src="/public/socket.io.js"></script>
+        <script src="/public/semantic.min.js"></script>
+        
+        <script>
+            var host = 'localhost';
+            var port = '3000';
+            var socket;
+            
+         	// 문서 로딩 후 실행됨
+            $(function() {
+
+                connectToServer();
+
+                var output = {id:"<%= user.email %>"};
+                console.log('서버로 보낼 데이터 : ' + JSON.stringify(output));
+
+                if (socket == undefined) {
+                    alert('서버에 연결되어 있지 않습니다. 먼저 서버에 연결하세요.');
+                    return;
+                }
+                socket.emit('login', output);
+                
+                //socket.emit('login', output);
+                
+                
+                //socket.emit('login', output);
+                
+
+				// 전송 버튼 클릭 시 처리
+                $("#sendButton").bind('click', function(event) {
+                    var sender = "<%= user.email %>";
+                    var recepient = "counselor@helpume.com";
+                    var data = $('#dataInput').val();
+
+                    var output = {sender:sender, recepient:recepient, command:'chat', type:'text', data:data};
+                    console.log('서버로 보낼 데이터 : ' + JSON.stringify(output));
+
+                    if (socket == undefined) {
+                        alert('서버에 연결되어 있지 않습니다. 먼저 서버에 연결하세요.');
+                        return;
+                    }
+
+                    socket.emit('message', output);
+                    
+                    addToDiscussion('self', data);
+                });
+
+				// 로그인 버튼 클릭 시 처리
+                $("#loginButton").bind('click', function(event) {
+                    var id = $('#idInput').val();
+                    var password = $('#passwordInput').val();
+                    var alias = $('#aliasInput').val();
+                    var today = $('#todayInput').val();
+
+                    var output = {id:id, password:password, alias:alias, today:today};
+                    console.log('서버로 보낼 데이터 : ' + JSON.stringify(output));
+
+                    if (socket == undefined) {
+                        alert('서버에 연결되어 있지 않습니다. 먼저 서버에 연결하세요.');
+                        return;
+                    }
+
+                    socket.emit('login', output);
+                });
+
+            });
+            
+			// 서버에 연결하는 함수 정의
+            function connectToServer() {
+
+                var options = {'forceNew':true};
+                var url = 'http://' + host + ':' + port;
+                socket = io.connect(url, options);
+
+                socket.on('connect', function() {
+                	println('웹소켓 서버에 연결되었습니다. : ' + url);
+
+                    socket.on('message', function(message) {
+                        console.log(JSON.stringify(message));
+
+                        println('<p>수신 메시지 : ' + message.sender + ', ' + message.recepient + ', ' + message.command + ', ' + message.data + '</p>');
+                        
+                        addToDiscussion('other', message.data);
+                    });
+
+                    socket.on('response', function(response) {
+                    	console.log(JSON.stringify(response));
+                    	println('응답 메시지를 받았습니다. : ' + response.command + ', ' + response.code + ', ' + response.message);
+                    });
+                    
+                });
+
+                socket.on('disconnect', function() {
+                    println('웹소켓 연결이 종료되었습니다.');
+                });
+
+            }
+            
+			function println(data) {
+				//console.log(data);
+				//$('#result').append('<p>' + data + '</p>');
+			}
+            
+            function addToDiscussion(writer, msg) {
+                println("addToDiscussion 호출됨 : " + writer + ", " + msg);
+
+                var img = '/public/images/user1.png';
+                if (writer == 'other') {
+                    img = '/public/images/user2.png';
+                }
+
+                var contents = "<li class='" + writer + "'>"
+                             + "  <div class='avatar'>"
+                             + "    <img src='" + img + "' />"
+                             + "  </div>"
+                             + "  <div class='messages'>"
+                             + "    <p>" + msg + "</p>"
+                             + "    <time datetime='2016-02-10 18:30'>18시 30분</time>"
+                             + "  </div>"
+                             + "</li>";
+
+                println("추가할 HTML : " + contents);
+                $(".discussion").append(contents);
+            }
+        </script>
+	</head>
+<body>
+	<h3>일대일 채팅하기</h3>
+    <div>
+		<input type="text" id="idInput" value="<%= user.email %>" />
+	</div>
+    <br>
+    <div>
+	    <div><span>받는사람 아이디 :</span> <input type="text" id="recepientInput" value="counselor@helpume.com" /></div>
+	    <div><span>메시지 데이터 :</span> <input type="text" id="dataInput" value=""/> </div>
+		<br>
+		<input type="button" id="sendButton" value="전송" />
+	</div>    
+        
+			<div class="ui segment" id="result" style="height:100%">
+			
+			  <ol class="discussion">
+			  </ol>
+			
+			</div>
+        
+</body>
+</html>
