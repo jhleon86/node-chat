@@ -144,7 +144,7 @@ module.exports = function(router, passport) {
 
     // 회원가입 인증
     router.route('/signup').post(passport.authenticate('local-signup', {
-        successRedirect : '/profile', 
+        successRedirect : '/', 
         failureRedirect : '/signup', 
         failureFlash : true 
     }));
